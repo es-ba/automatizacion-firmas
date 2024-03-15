@@ -1,7 +1,7 @@
 import { AppBackend, Context, MenuDefinition, MenuInfoBase } from "backend-plus";
 import { staticConfigYaml } from "./def-config";
-import {firmas} from "./table-firmas"
 import {usuarios} from "./table-usuarios"
+import {modelos_firma} from "./table-modelos_firma"
 export class AppFirmas extends AppBackend {
 
     configStaticConfig(){
@@ -14,6 +14,7 @@ export class AppFirmas extends AppBackend {
         menuContent.push(
             {menuType: 'menu', name:'config', label:'configurar', menuContent:[
                 {menuType:'table', name:'usuarios'  },
+                {menuType:'table', name:'modelos_firma'  },
             ]}
         )
         return {menu:menuContent};
@@ -22,9 +23,9 @@ export class AppFirmas extends AppBackend {
     prepareGetTables(){
         super.prepareGetTables();
         this.getTableDefinition={
-            ... this.getTableDefinition,
-            firmas  ,  
+            ... this.getTableDefinition, 
             usuarios,  
+            modelos_firma
         }
     }
     
