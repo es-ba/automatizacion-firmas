@@ -1,0 +1,21 @@
+{
+  "name": "firmas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "App de firmas",
+  "main": "server-firmas.ts",
+  "dependencies": {
+    "backend-plus": "2.0.0-rc.8"
+  },
+  "devDependencies": {
+    "typescript": "5.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "v": "tsc -v",
+    "build": "tsc -p tsconfig-server.json",
+    "start":"node dist/server/server-firmas.js"
+  },
+  "author": "",
+  "license": "MIT"
+}
