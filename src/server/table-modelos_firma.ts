@@ -10,6 +10,7 @@ export function modelos_firma(context: TableContext): TableDefinition {
         editable: admin,
         fields: [
             { name: 'modelo'                , typeName: 'text', nullable: false },
+            { name: 'nombre'                , typeName: 'text', nullable: false , isName: true},
             { name: 'con_titular'           , typeName: 'boolean' },
             { name: 'con_division'          , typeName: 'boolean' },
             { name: 'con_departamento'      , typeName: 'boolean' },
