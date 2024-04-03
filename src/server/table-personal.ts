@@ -19,7 +19,7 @@ export function personal(context: TableContext): TableDefinition {
             { name: 'director_general', typeName: 'text' },
             { name: 'direccion_general', typeName: 'text' },
             { name: 'telefono', typeName: 'text' },
-            { name: 'postal1', typeName: 'text' },
+            { name: 'dir_postal1', typeName: 'text' },
             { name: 'dir_postal2', typeName: 'text' },
             { name: 'mail', typeName: 'text' },
             { name: 'firma_generada_html', typeName: 'text' },
