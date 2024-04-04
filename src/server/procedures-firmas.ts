@@ -10,9 +10,17 @@ export const ProceduresFirmas: ProcedureDef[] = [
         parameters: [],
         coreFunction: async (context: ProcedureContext, _params: CoreFunctionParameters) => {
             let fieldsToReplace: {target:string, source:string}[] = [
-                {target:'direccion_postal1', source:'dir_postal1'}, 
+                {target:'titular', source:'titular'},
+                {target:'director_general', source:'director_general'},
+                {target:'direccion_general', source:'direccion_general'},
+                {target:'departamento', source:'departamento'},
+                {target:'subdireccion', source:'subdireccion'},
+                {target:'division', source:'division'},
                 {target:'telefono', source:'telefono'},
-                {target:'direccion_postal2', source:'dir_postal2'}
+                {target:'direccion_postal1', source:'dir_postal1'},
+                {target:'direccion_postal2', source:'dir_postal2'},
+                {target:'direccion', source:'direccion'},
+                {target:'mail', source:'mail'}
             ];
             let replacers = fieldsToReplace.reduce((query , currentElem, currentIndex )=>{
                 return `REPLACE(${currentIndex==0? 'mf.template_html': query}, '$$${currentElem.target}',COALESCE(p.${currentElem.source}::text,''))`
