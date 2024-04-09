@@ -23,7 +23,7 @@ export const ProceduresFirmas: ProcedureDef[] = [
                 {target:'mail', source:'mail'}
             ];
             let replacers = fieldsToReplace.reduce((query , currentElem, currentIndex )=>{
-                return `REPLACE(${currentIndex==0? 'mf.template_html': query}, '$$${currentElem.target}',COALESCE(p.${currentElem.source}::text,''))`
+                return `REPLACE(${currentIndex==0? 'mf.template_html': query}, '$$${currentElem.target}$$',COALESCE(p.${currentElem.source}::text,''))`
             },`''`)
             await context.client.query(`
                 UPDATE personal p
