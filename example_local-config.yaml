@@ -1,0 +1,15 @@
+server:
+  port: 3000
+db:
+  port: 5433
+  password: REPLACE_WITH_YOUR_PASSWORD
+install:
+  dump:
+    drop-his: true
+client-setup: 
+  lang: es 
+devel:
+  delay: 0
+log:
+  db:
+    on-demand: true
