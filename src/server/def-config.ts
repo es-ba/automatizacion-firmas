@@ -7,9 +7,9 @@ db:
   motor: postgresql
   host: localhost
   description: base de datos de firmas
-  database: puntapie_inicial_db
-  schema: puntapie_inicial
-  user: puntapie_inicial_admin
+  database: firmas_db
+  schema: firmas
+  user: firmas_admin
 login:
   table: usuarios
   userFieldName: usuario
@@ -31,7 +31,7 @@ client-setup:
 install:
   dump:
     db:
-      owner: puntapie_inicial_owner
+      owner: firmas_owner
     scripts:
       post-adapt:
       - ../node_modules/pg-triggers/lib/recreate-his.sql
