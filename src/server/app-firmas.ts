@@ -1,14 +1,46 @@
-import { AppBackend, Context, MenuDefinition, MenuInfoBase } from "backend-plus";
+import { AppBackend, Context, Express, MenuDefinition, MenuInfoBase } from "backend-plus";
 import { staticConfigYaml } from "./def-config";
 import {usuarios} from "./table-usuarios"
 import {modelos_firma} from "./table-modelos_firma"
 import { personal } from "./table-personal";
 import { ProceduresFirmas } from "./procedures-firmas";
+import * as miniTools from "mini-tools";
 export class AppFirmas extends AppBackend {
 
     configStaticConfig(){
         super.configStaticConfig();
         this.setStaticConfig(staticConfigYaml);
+    }
+
+    override addSchrödingerServices(mainApp:Express, baseUrl:string){
+        let be=this;
+        super.addSchrödingerServices(mainApp, baseUrl);
+        
+        
+        mainApp.get(baseUrl+'/firma-mostrar',async function(req,res,next){
+            // @ts-ignore sé que voy a recibir useragent por los middlewares de Backend-plus
+            var {useragent} = req;
+            await be.inDbClient(req, async function(client){
+                try{
+                    if(!req.query.cuit){
+                        throw Error (`no se ingresó cuit en parámetro` )
+                    }
+                    const html = (await client.query(`
+                        select firma_generada_html 
+                            from personal 
+                            where cuit = $1`,
+                        [req.query.cuit]).fetchUniqueValue()).value;
+                    if(!html){
+                        throw Error (`no hay firma generada para el cuit ${req.query.cuit}` )
+                    }
+                    
+                    miniTools.serveText(html, 'html')(req,res);
+                }catch(err){
+                    console.log(err);
+                    miniTools.serveErr(req, res, next)(err);
+                }
+            })
+        });
     }
 
     getMenu(_context:Context):MenuDefinition{
