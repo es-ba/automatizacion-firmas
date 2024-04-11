@@ -12,7 +12,8 @@ export const ProceduresFirmas: ProcedureDef[] = [
         parameters: [],
         coreFunction: async (context: ProcedureContext, _params: CoreFunctionParameters) => {
             const personalTableDef = personal(context)
-            let replacers = personalTableDef.fields.reduce((query , currentField:FieldDefinition, currentIndex )=>{
+            let fieldsintable = personalTableDef.fields.filter(x =>  x.inTable != false )
+            let replacers = fieldsintable.reduce((query , currentField:FieldDefinition, currentIndex )=>{
                 return `REPLACE(${currentIndex==0? 'mf.template_html': query}, '$$${currentField.name}$$',COALESCE(p.${currentField.name}::text,''))`
             },`''`)
             await context.client.query(`
