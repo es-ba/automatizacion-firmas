@@ -28,6 +28,7 @@ client-setup:
   menu: true
   lang: es
   user-scalable: no
+  cursors: true
 install:
   dump:
     db:
