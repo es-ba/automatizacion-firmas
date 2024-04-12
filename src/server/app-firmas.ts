@@ -38,7 +38,8 @@ export class AppFirmas extends AppBackend {
         mainApp.get(baseUrl+'/menu/firma-descargar',async function(req,res,next){
             try{
                 const fileData = await getHtml(be,req);
-                const fileName = 'firma.html'
+                const mailUser = (<string>req.query.mail).split('@')[0]
+                const fileName = 'firma-'+mailUser+'.html'
                 const fileType = 'text/html'
                 res.writeHead(200, {
                     'Content-Disposition': `attachment; filename="${fileName}"`,

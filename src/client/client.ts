@@ -6,16 +6,16 @@ myOwn.clientSides.accionesFirma = {
     prepare: function (depot, fieldName) {
         const td = depot.rowControls[fieldName];
         td.innerHTML='';
-        const botonMostrar = html.button('ver firma').create();
-        const botonDescargar = html.button('mostrar firma').create();
+        const botonMostrar = html.button('mostrar firma').create();
+        const botonDescargar = html.button('descargar firma').create();
         td.appendChild(botonMostrar);
         td.appendChild(botonDescargar);
         botonMostrar.onclick=function(){
             window.open(`${location.origin}${location.pathname}/firma-mostrar?cuit=${depot.row.cuit}`, '_mostrar_firma')
-        }
+        }
         botonDescargar.onclick=function(){
-            window.open(`${location.origin}${location.pathname}/firma-descargar?cuit=${depot.row.cuit}`)
-        }
+            window.open(`${location.origin}${location.pathname}/firma-descargar?cuit=${depot.row.cuit}&mail=${depot.row.mail}`)
+        }
         return ''
-    },
+    },
 };
