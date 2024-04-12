@@ -14,7 +14,7 @@ export const ProceduresFirmas: ProcedureDef[] = [
             const personalTableDef = personal(context)
             let fieldsintable = personalTableDef.fields.filter(x =>  x.inTable != false )
             let replacers = fieldsintable.reduce((query , currentField:FieldDefinition, currentIndex )=>{
-                return `REPLACE(${currentIndex==0? 'mf.template_html': query}, '$$${currentField.name}$$',COALESCE(p.${currentField.name}::text,''))`
+                return `REPLACE(${currentIndex==0? 'mf.template_html': query}, '$$${currentField.name}$$',COALESCE(p.${context.be.db.quoteIdent(currentField.name)}::text,''))`
             },`''`)
             await context.client.query(`
                 UPDATE personal p
