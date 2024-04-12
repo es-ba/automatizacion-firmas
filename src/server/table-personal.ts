@@ -11,7 +11,7 @@ export function personal(context: TableContext): TableDefinition {
         fields: [
             { name: 'cuit', typeName: 'bigint', nullable: false },
             { name: 'modelo', typeName: 'text', nullable: false },
-            { name: 'titular', typeName: 'text' },
+            { name: 'titular', typeName: 'text', nullable: false },
             { name: 'division', typeName: 'text' },
             { name: 'departamento', typeName: 'text' },
             { name: 'direccion', typeName: 'text' },
@@ -22,7 +22,7 @@ export function personal(context: TableContext): TableDefinition {
             { name: 'dir_postal1', typeName: 'text' },
             { name: 'espacio', typeName: 'integer', width:4 },
             { name: 'dir_postal2', typeName: 'text' },
-            { name: 'mail', typeName: 'text' },
+            { name: 'mail', typeName: 'text', nullable: false },
             { name: 'firma_generada_html', typeName: 'text' },
             { name: 'acciones',             inTable:false, typeName:'text'      , editable:false  , clientSide:'accionesFirma'},
         ],

@@ -1,6 +1,6 @@
-cuit|modelo|titular|director_general|dir_postal2|dir_postal1|departamento|subdireccion|telefono
-99999999999|A|jaimito|jefe1|martin garcia|465 piso 3|sistemas|lala|1234556
-11111111111|B|pepito|jefe2|martin garcia|465 piso 3|RRHH|lala2|642123
+cuit|modelo|titular|director_general|dir_postal2|dir_postal1|departamento|subdireccion|telefono|mail
+99999999999|A|jaimito|jefe1|martin garcia|465 piso 3|sistemas|lala|1234556|jaimito@gmail.com
+11111111111|B|pepito|jefe2|martin garcia|465 piso 3|RRHH|lala2|642123|pepito@gmail.com
 
 
 
