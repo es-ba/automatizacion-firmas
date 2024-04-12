@@ -20,6 +20,7 @@ export function personal(context: TableContext): TableDefinition {
             { name: 'direccion_general', typeName: 'text' },
             { name: 'telefono', typeName: 'text' },
             { name: 'dir_postal1', typeName: 'text' },
+            { name: 'espacio', typeName: 'integer', width:4 },
             { name: 'dir_postal2', typeName: 'text' },
             { name: 'mail', typeName: 'text' },
             { name: 'firma_generada_html', typeName: 'text' },
