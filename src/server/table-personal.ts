@@ -23,7 +23,7 @@ export function personal(context: TableContext): TableDefinition {
             { name: 'dir_postal2', typeName: 'text' },
             { name: 'mail', typeName: 'text' },
             { name: 'firma_generada_html', typeName: 'text' },
-            { name: 'ver_firma',             inTable:false, typeName:'text'      , editable:false  , clientSide:'mostrarFirma'},
+            { name: 'acciones',             inTable:false, typeName:'text'      , editable:false  , clientSide:'accionesFirma'},
         ],
         primaryKey: ['cuit'],
         foreignKeys: [{ references: "modelos_firma", fields: ["modelo"] },

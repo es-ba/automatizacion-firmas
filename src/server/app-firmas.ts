@@ -18,31 +18,50 @@ export class AppFirmas extends AppBackend {
     override addSchrödingerServices(mainApp:Express, baseUrl:string){
         let be=this;
         super.addSchrödingerServices(mainApp, baseUrl);
-        
-        mainApp.get(baseUrl+'/firma-mostrar',async function(req:any,res,next){
-            // @ts-ignore sé que voy a recibir useragent por los middlewares de Backend-plus
-            var {useragent} = req;
-            await be.inDbClient(req, async function(client){
-                try{
-                    if(!req.query.cuit){
-                        throw Error (`no se ingresó cuit en parámetro` )
-                    }
-                    const html = (await client.query(`
-                        select firma_generada_html 
-                            from personal 
-                            where cuit = $1`,
-                        [req.query.cuit]).fetchUniqueValue()).value;
-                    if(!html){
-                        throw Error (`no hay firma generada para el cuit ${req.query.cuit}` )
-                    }
-                    
-                    miniTools.serveText(html, 'html')(req,res);
-                }catch(err){
-                    console.log(err);
-                    miniTools.serveErr(req, res, next);
+
+        const getHtml = async (be:any, req:any)=>
+            await be.inDbClient(req, async function(client:any){
+                if(!req.query.cuit){
+                    throw Error (`no se ingresó cuit en parámetro` )
                 }
-            })
+                const html = (await client.query(`
+                    select firma_generada_html 
+                        from personal 
+                        where cuit = $1`,
+                    [req.query.cuit]).fetchUniqueValue()).value;
+                if(!html){
+                    throw Error (`no hay firma generada para el cuit ${req.query.cuit}` )
+                }
+                return html;
+            });
+
+        mainApp.get(baseUrl+'/menu/firma-descargar',async function(req,res,next){
+            try{
+                const fileData = await getHtml(be,req);
+                const fileName = 'firma.html'
+                const fileType = 'text/html'
+                res.writeHead(200, {
+                    'Content-Disposition': `attachment; filename="${fileName}"`,
+                    'Content-Type': fileType,
+                })
+                const download = Buffer.from(fileData)
+                res.end(download)
+            }catch(err){
+                console.log(err);
+                miniTools.serveErr(req, res, next);
+            }
         });
+
+        mainApp.get(baseUrl+'/menu/firma-mostrar',async function(req,res,next){
+            try{
+                const html = await getHtml(be,req);
+                miniTools.serveText(html, 'html')(req,res);
+            }catch(err){
+                console.log(err);
+                miniTools.serveErr(req, res, next);
+            }
+        });
+        
     }
 
     clientIncludes(req:Request|null, opts:OptsClientPage):ClientModuleDefinition[]{

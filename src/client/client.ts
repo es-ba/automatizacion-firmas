@@ -1,14 +1,20 @@
 import {html} from "js-to-html";
-myOwn.clientSides.mostrarFirma = {
+
+myOwn.clientSides.accionesFirma = {
     update: function (_depot, _fieldName) {
     },
     prepare: function (depot, fieldName) {
-        var td = depot.rowControls[fieldName];
+        const td = depot.rowControls[fieldName];
         td.innerHTML='';
-        var boton = html.button('ver firma').create();
-        td.appendChild(boton);
-        boton.onclick=function(){
-            window.open(depot.row.url_plan, '_mostrar_firma')
+        const botonMostrar = html.button('ver firma').create();
+        const botonDescargar = html.button('mostrar firma').create();
+        td.appendChild(botonMostrar);
+        td.appendChild(botonDescargar);
+        botonMostrar.onclick=function(){
+            window.open(`${location.origin}${location.pathname}/firma-mostrar?cuit=${depot.row.cuit}`, '_mostrar_firma')
+        }
+        botonDescargar.onclick=function(){
+            window.open(`${location.origin}${location.pathname}/firma-descargar?cuit=${depot.row.cuit}`)
         }
         return ''
     },
