@@ -9,7 +9,7 @@ export function personal(context: TableContext): TableDefinition {
         title: 'Personal',
         editable: admin,
         fields: [
-            { name: 'cuit', typeName: 'bigint', nullable: false },
+            { name: 'cuit', typeName: 'text', nullable: false },
             { name: 'modelo', typeName: 'text', nullable: false },
             { name: 'titular', typeName: 'text', nullable: false },
             { name: 'division', typeName: 'text' },
@@ -20,7 +20,7 @@ export function personal(context: TableContext): TableDefinition {
             { name: 'direccion_general', typeName: 'text' },
             { name: 'telefono', typeName: 'text' },
             { name: 'dir_postal1', typeName: 'text' },
-            { name: 'espacio', typeName: 'integer' },
+            { name: 'espacio', typeName: 'text' },
             { name: 'dir_postal2', typeName: 'text' },
             { name: 'mail', typeName: 'text', nullable: false },
             { name: 'firma_generada_html', typeName: 'text' },
