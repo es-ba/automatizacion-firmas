@@ -26,6 +26,7 @@ export function personal(context: TableContext): TableDefinition {
             { name: 'acciones',             inTable:false, typeName:'text'      , editable:false  , clientSide:'accionesFirma'},
         ],
         primaryKey: ['cuit'],
+        hiddenColumns: ['firma_generada_html'],
         foreignKeys: [{ references: "modelos_firma", fields: ["modelo"] },
         ]
     };
