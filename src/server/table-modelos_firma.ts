@@ -22,7 +22,7 @@ export function modelos_firma(context: TableContext): TableDefinition {
             { name: 'con_dir_postal1'       , typeName: 'boolean' },
             { name: 'con_dir_postal2'       , typeName: 'boolean' },
             { name: 'con_mail'              , typeName: 'boolean' },
-            { name: 'template_html'         , typeName: 'text'    },
+            { name: 'template_html'         , typeName: 'text', width:800    },
         ],
         primaryKey: ['modelo'],
     };
