@@ -51,7 +51,7 @@ export class AppFirmas extends AppBackend {
                 res.end(download)
             }catch(err){
                 console.log(err);
-                miniTools.serveErr(req, res, next)(err);
+                miniTools.serveErr(req, res, next)(<Error>err);
             }
         });
 
@@ -61,7 +61,7 @@ export class AppFirmas extends AppBackend {
                 miniTools.serveText(firma_generada_html, 'html')(req,res);
             }catch(err){
                 console.log(err);
-                miniTools.serveErr(req, res, next)(err);
+                miniTools.serveErr(req, res, next)(<Error>err);
             }
         });
         

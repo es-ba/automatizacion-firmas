@@ -1,5 +1,4 @@
 import {html} from "js-to-html";
-import * as TypeStore from "type-store";
 
 myOwn.clientSides.accionesFirma = {
     update: function (_depot, _fieldName) {
