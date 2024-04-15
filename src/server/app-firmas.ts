@@ -82,14 +82,13 @@ export class AppFirmas extends AppBackend {
     getMenu(_context:Context):MenuDefinition{
         var menuContent:MenuInfoBase[]=[];
         menuContent.push(
-            {menuType: 'menu', name:'config', label:'configurar', menuContent:[
+            {menuType:'table', name:'personal'  },
+            {menuType:'proc',  name:'firmas_generar', label:'generar firmas'},
+            {menuType: 'menu', name:'config'        , label:'configurar', menuContent:[
                 {menuType:'table', name:'usuarios'  },
-                {menuType:'proc', name:'firmas_generar', label:'Generar firmas'},
-            ]},
-            {menuType: 'menu', name:'tablas', label:'tablas', menuContent:[
                 {menuType:'table', name:'modelos_firma'  },
-                {menuType:'table', name:'personal'  },
-            ]}
+                
+            ]},
         )
         return {menu:menuContent};
     }
