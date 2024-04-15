@@ -19,26 +19,28 @@ export class AppFirmas extends AppBackend {
         let be=this;
         super.addSchrödingerServices(mainApp, baseUrl);
 
-        const getHtml = async (be:any, req:any)=>
+        const getPersonaInfo = async (be:any, req:any)=>
             await be.inDbClient(req, async function(client:any){
-                if(!req.query.cuit){
-                    throw Error (`no se ingresó cuit en parámetro` )
+                if (!req.query.cuit) {
+                    throw Error(`no se ingresó cuit en parámetro`);
                 }
-                const html = (await client.query(`
-                    select firma_generada_html 
+                const result = (await client.query(`
+                    select * 
                         from personal 
                         where cuit = $1`,
-                    [req.query.cuit]).fetchUniqueValue()).value;
-                if(!html){
-                    throw Error (`no hay firma generada para el cuit ${req.query.cuit}` )
+                    [req.query.cuit]).fetchUniqueRow()).row;
+                if(!result.firma_generada_html){
+                    throw Error (`no hay firma generada para el cuit ${req.query.cuit}. Por favor genere las firmas` )
+                }else{
+                    return result;
                 }
-                return html;
             });
 
         mainApp.get(baseUrl+'/menu/firma-descargar',async function(req,res,next){
             try{
-                const fileData = await getHtml(be,req);
-                const mailUser = (<string>req.query.mail).split('@')[0]
+                const personaInfo = await getPersonaInfo(be,req);
+                const {firma_generada_html: fileData, mail} = personaInfo;
+                const mailUser = (mail).split('@')[0]
                 const fileName = 'firma-'+mailUser+'.html'
                 const fileType = 'text/html'
                 res.writeHead(200, {
@@ -49,17 +51,17 @@ export class AppFirmas extends AppBackend {
                 res.end(download)
             }catch(err){
                 console.log(err);
-                miniTools.serveErr(req, res, next);
+                miniTools.serveErr(req, res, next)(err);
             }
         });
 
         mainApp.get(baseUrl+'/menu/firma-mostrar',async function(req,res,next){
             try{
-                const html = await getHtml(be,req);
-                miniTools.serveText(html, 'html')(req,res);
+                const {firma_generada_html} = await getPersonaInfo(be,req);
+                miniTools.serveText(firma_generada_html, 'html')(req,res);
             }catch(err){
                 console.log(err);
-                miniTools.serveErr(req, res, next);
+                miniTools.serveErr(req, res, next)(err);
             }
         });
         

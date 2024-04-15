@@ -1,4 +1,5 @@
 import {html} from "js-to-html";
+import * as TypeStore from "type-store";
 
 myOwn.clientSides.accionesFirma = {
     update: function (_depot, _fieldName) {
@@ -14,7 +15,7 @@ myOwn.clientSides.accionesFirma = {
             window.open(`${location.origin}${location.pathname}/firma-mostrar?cuit=${depot.row.cuit}`, '_mostrar_firma')
         }
         botonDescargar.onclick=function(){
-            window.open(`${location.origin}${location.pathname}/firma-descargar?cuit=${depot.row.cuit}&mail=${depot.row.mail}`)
+            window.open(`${location.origin}${location.pathname}/firma-descargar?cuit=${depot.row.cuit}`, '_descargar_firma')
         }
         return ''
     },

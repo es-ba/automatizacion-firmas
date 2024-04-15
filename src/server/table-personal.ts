@@ -9,7 +9,7 @@ export function personal(context: TableContext): TableDefinition {
         title: 'Personal',
         editable: admin,
         fields: [
-            { name: 'cuit', typeName: 'text', nullable: false },
+            { name: 'cuit', typeName: 'bigint', nullable: false },
             { name: 'modelo', typeName: 'text', nullable: false },
             { name: 'titular', typeName: 'text', nullable: false },
             { name: 'division', typeName: 'text' },
