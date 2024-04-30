@@ -9,6 +9,7 @@ export function personal(context: TableContext): TableDefinition {
         title: 'Personal',
         editable: admin,
         fields: [
+            { name: 'acciones',             inTable:false, typeName:'text'      , editable:false  , clientSide:'accionesFirma'},
             { name: 'cuit', typeName: 'bigint', nullable: false },
             { name: 'modelo', typeName: 'text', nullable: false },
             { name: 'titular', typeName: 'text', nullable: false },
@@ -26,7 +27,6 @@ export function personal(context: TableContext): TableDefinition {
             { name: 'dir_postal2', typeName: 'text' },
             { name: 'mail', typeName: 'text', nullable: false },
             { name: 'firma_generada_html', typeName: 'text' },
-            { name: 'acciones',             inTable:false, typeName:'text'      , editable:false  , clientSide:'accionesFirma'},
         ],
         primaryKey: ['cuit'],
         hiddenColumns: ['firma_generada_html'],
