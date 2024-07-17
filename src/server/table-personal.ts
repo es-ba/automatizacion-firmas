@@ -18,6 +18,7 @@ export function personal(context: TableContext): TableDefinition {
             { name: 'direccion', typeName: 'text' },
             { name: 'subdireccion', typeName: 'text' },
             { name: 'director_general', typeName: 'text' },
+            { name: 'idecba', typeName: 'text'},
             { name: 'direccion_general', typeName: 'text' },
             { name: 'prefijo_telefono', typeName: 'text' },
             { name: 'telefono', typeName: 'text' },
