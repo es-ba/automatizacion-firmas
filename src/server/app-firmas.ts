@@ -41,7 +41,7 @@ export class AppFirmas extends AppBackend {
                 const personaInfo = await getPersonaInfo(be,req);
                 const {firma_generada_html: fileData, mail} = personaInfo;
                 const mailUser = (mail).split('@')[0]
-                const fileName = 'firma-'+mailUser+'.html'
+                const fileName = 'firma-'+mailUser+'.htm'
                 const fileType = 'text/html'
                 res.writeHead(200, {
                     'Content-Disposition': `attachment; filename="${fileName}"`,
